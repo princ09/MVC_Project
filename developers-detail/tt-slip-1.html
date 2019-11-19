@@ -1,0 +1,278 @@
+<html>
+
+<head>
+	<LINK rel='stylesheet' href='../Framewrk/stylesheet/stylesheet.css' type='text/css' media='screen'>
+	<LINK rel='stylesheet' href='../Framewrk/stylesheet/print.css' type='text/css' media='print'>
+	<script language="Javascript" src="../../../Framewrk/subs/jquery.js"></script>
+	<script type="text/javascript" src="../../../Framewrk/subs/jquery.blockUI.js"></script>
+	<script language="JavaScript">
+		var $j = jQuery.noConflict();
+		var main = top.opener.window;
+		$j(document).ready(function ($) {
+			$j('.client_name').html(main.globalClientName);
+		});
+	</script>
+</head>
+
+<body>
+
+	<table width="100%">
+		<tr width="100%">
+			<td align=left>
+				<input type="button" name="print" class="button" value="Print" onClick="javascript:window.print()"
+					style="WIDTH: 90px; HEIGHT: 24px">
+			</td>
+		<tr>
+
+	</table>
+	<table width="100%">
+		<tr>
+			<td>
+				<IMG SRC="../Framewrk/images/credence_logo.jpg" width="225" height="40" BORDER="0">
+
+			<td>
+			<td align=right>
+				<label class="content_label">Dated :</label><label class="content_data">
+					{{ getServerDateTime() }}</label>
+			</td>
+
+		</tr>
+	</table>
+	<center><label class="voucher_heading">TT ADVICE</label></center>
+	<BR>
+	<FORM class="dynamicform">
+		<table border=0 width="100%" cellspacing='0' cellpadding='0'>
+			<tr>
+				<td width=25% valign="top">
+					<label class="content_data" id='branch_address'>
+						{{DD_dataset.fieldbyname('entity')}}{{DD_dataset.fieldbyname('address')}}
+					</label>
+				</td>
+			</TR>
+			<tr>
+				<td colspan='2'>
+					&nbsp;
+				</td>
+			</tr>
+
+			<tr>
+				<td colspan='2'>
+					<label class="content_label">TO, </label>
+				</td>
+			</tr>
+
+			<tr>
+				<td colspan='2'>
+					<label class="content_label"> CENTRALISED SWIFT CENTRE <BR> NEW DELHI</label>
+				</td>
+			</tr>
+
+			<tr>
+				<td colspan='2'> &nbsp;
+				</td>
+			</tr>
+
+			<tr>
+				<td> <label class="content_label">NOSTRO - </label>
+				</td>
+				<td> <label class="content_data">{{getFieldData('sswiftcode')}}</label>
+				</td>
+			</tr>
+		</table>
+
+		<table width="100%" style="empty-cells:show;" border='1px'>
+			<tr>
+				<td width="5%" align="center" class="content_label" valign="top"> : 20 :
+				</td>
+				<td width="40%" valign="top"><label class="content_label"> Payment Details </label>
+				</td>
+				<td width="55%"> <label class="content_data"> </label>
+				</td>
+			</tr>
+			<tr>
+				<td width="5%" align="center" class="content_label" valign="top"> : 23B :
+				</td>
+				<td width="40%" valign="top"><label class="content_label"> Payment Date </label>
+				</td>
+				<td width="55%"> <label class="content_data"> </label>
+				</td>
+			</tr>
+
+			<!--tr >
+	<td > &nbsp;</td><td > &nbsp;</td><td > &nbsp;</td>
+</tr-->
+
+			<tr>
+				<td align="center" class="content_label" valign="top"> : 21 :</td>
+				<td valign="top">
+					<label class="content_label">Ordering Party </label>
+				</td>
+				<td> <label class="content_data"></label>
+				</td>
+			</tr>
+
+			<tr>
+				<td> &nbsp;</td>
+				<td valign="top">
+					<label class="content_label">Customer Reference </label>
+				</td>
+				<td> <label class="content_data"></label>
+				</td>
+			</tr>
+			<tr>
+				<td align="center" class="content_label" valign="top"> : 33B :</td>
+				<td valign="top">
+					<label class="content_label">Citi Reference </label>
+				</td>
+				<td> <label class="content_data"></label>
+				</td>
+			</tr>
+
+			<!--
+<tr>
+<td> &nbsp;</td>
+	<td valign="top">
+		   <label class="content_label">VALUE DATE </label>
+	</td>
+    <td>	<label class="content_data">{{getFieldData('trans_date')}}</laBEL>
+    </td>
+</tr>
+-->
+			<!--tr>
+<td> &nbsp;</td><td> &nbsp;</td><td> &nbsp;</td>
+	
+</tr-->
+
+			<tr>
+				<td align="center" class="content_label" valign="top"> : 50 :</td>
+				<td valign="top">
+					<label class="content_label">Beneficiary Account </label>
+				</td>
+				<td> <label class="content_data"></label>
+				</td>
+			</tr>
+
+
+			<!--tr>
+<td> &nbsp;</td><td> &nbsp;</td><td> &nbsp;</td>
+	
+</tr-->
+
+			<tr>
+				<td class="content_label" align="center" valign="top"> : 52D :</td>
+				<td valign="top">
+					<label class="content_label">Beneficiary Name</label>
+				</td>
+				<td> <label class="content_data"></label>
+				</td>
+			</tr>
+
+
+			<tr>
+				<td> &nbsp;</td>
+				<td valign="top">
+					<label class="content_label">Beneficiary Address</label>
+				</td>
+				<td><label class="content_data client_name"></label>
+				</td>
+			</tr>
+
+
+			<tr>
+				<td> &nbsp;</td>
+				<td valign="top">
+					<label class="content_label">Beneficiary Bank </label>
+				</td>
+				<td><label class="content_data"></label>
+				</td>
+			</tr>
+
+			<!--TR><td> &nbsp;</td><td> &nbsp;</td><td> &nbsp;</td></TR-->
+			<!--
+<tr>
+   <td class="content_label" align="center" valign="top"> : 53A :</td>
+	<td valign="top">
+		   <label class="content_label">SENDERS CORRESPONDENT </label>
+	</td>
+    <td>  <label class="content_data">{{getFieldData('benif_bank')}}</label>
+    </td>
+</tr>
+-->
+			<!--tr>
+<td> &nbsp;</td><td> &nbsp;</td><td> &nbsp;</td>
+</tr-->
+
+			<tr>
+				<td class="content_label" align="center" valign="top">: 56 :</td>
+				<td valign="top">
+					<label class="content_label">Beneficiary Bank Routing Code </label>
+				</td>
+				<td> <label class="content_data"></label>
+				</td>
+			</tr>
+
+			<tr>
+				<td>&nbsp;</td>
+				<td valign="top">
+					<label class="content_label">Beneficiary Bank Address </label>
+				</td>
+				<td> <label class="content_data"></label>
+				</td>
+			</tr>
+
+			<tr>
+				<td>&nbsp;</td>
+				<td valign="top">
+					<label class="content_label">Charges Indicator</label>
+				</td>
+				<td> <label class="content_data"></label>
+				</td>
+			</tr>
+
+			<tr>
+				<td>&nbsp;</td>
+				<td valign="top">
+					<label class="content_label">Additional Clearing/Settlement Details</label>
+				</td>
+				<td> <label class="content_data"></label>
+				</td>
+			</tr>
+
+			<tr>
+				<td>&nbsp;</td>
+				<td valign="top">
+					<label class="content_label">Clearing Reference Number</label>
+				</td>
+				<td> <label class="content_data">{{getFieldData('other_acct_no')}}</label>
+				</td>
+			</tr>
+			<!--tr>
+<td> &nbsp;</td><td> &nbsp;</td><td> &nbsp;</td>
+</tr-->
+			<tr>
+				<td>&nbsp; </td>
+				<td valign="top">
+					<label class="content_label">Beneficiary Bank Clearing ID</label>
+				</td>
+				<td> <label class="content_data"></label>
+				</td>
+			</tr>
+
+
+		</TABLE>
+	</form>
+	<BR>
+	We hereby certify that all the necessary documentation duly filled in all respects required for the particular
+	remittance as per FEMA and the guidelines issued by the bank has been taken & transaction has been verified.
+
+	<br>
+	<br><br>
+	<table width="100%">
+		<tr width="100%">
+			<td width="50%" align=left>SIGNATURE OF THE OFFICER </td>
+			<td width="50%" align=right>SIGNATURE OF THE OFFICER </td>
+		</tr>
+	</table>
+</body>
+
+</html>

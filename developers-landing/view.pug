@@ -1,0 +1,23 @@
+extends ../index.pug
+
+block content
+    section.hero.is-dark.is-medium
+        .hero-body
+            .container
+                h1.title.is-1= title
+                h2.subtitle.is-3= subtitle
+    ul.container(style={'padding':'20px'})
+        each developer in developers
+            a(href='/developers/'+developer.id)
+                article.media
+                    figure.media-left
+                        p.image.is-128x128.is-hidden-mobile
+                            img(src=developer.image)
+                        p.image.is-64x64.is-hidden-tablet
+                            img(src=developer.image)
+                    .media-content
+                        .content(style={'padding-top':'20px'})
+                            h3= developer.name
+                            p= 'Favourite language '+ developer.favouritelanguage
+
+

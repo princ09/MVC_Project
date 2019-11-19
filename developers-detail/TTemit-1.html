@@ -1,0 +1,361 @@
+<!--
+Reviewd By	:	Praveen
+Patch		:	mfxfes_3_7_1_50
+Date		:	28-10-2009	
+
+/** 
+ * @modified by : Dipti
+ * @date 		: 25-12-2011
+ * @desc		: To enable modification of data.
+*/
+-->
+
+<div>
+
+<input type="hidden" name = "trans_no"  id = "trans_no" value="">
+<input type="hidden" name = "trans_type_cd" id = "trans_type_cd" value="">
+
+<form name = "frmTTMaster" class = "dynamicform" id = "frmTTMaster" >
+<fieldset>
+		<table border=0  cellpadding="2" width =100%>
+			<tr>
+				<td class="label" >
+						<b>Date:</b>
+				</td>
+				<td>
+						<input type = 'text' class = 'inputspecial'   value = "{{getServerDate()}}" name = 'tt_date' id = 'tt_date' fieldname = 'trans_date'  tabindex = '' accesskey = "" style = "width:90px;" readonly style="background - color: #CCC" >
+				</td>
+				<td class="label" align = "right">
+						<b>Settlement Channel:</b>
+				</td>
+				<td align = "left"> &nbsp;</td>
+				<td>&nbsp;</td>
+				<td>
+						<!--input type = 'text' class = 'inputspecial'   value = "{{getParameter('Default_Settlement_Channel')}}" name = 'setl_channel' id = 'setl_channel' fieldname = 'setl_channel'  tabindex = '' accesskey = "" style = "width:90px;" style="background - color: #CCC" onchange="makeUpperCase(this.value,setl_channel);onSetlChannelChange();"-->
+						
+						<select  class="inputspecial"  accesskey=''value = "{{getParameter('Default_Settlement_Channel')}}" style="width:110px" id="setl_channel" fieldname="setl_channel"  validator=""  tabindex='' onchange="makeUpperCase(this.value,setl_channel);checkSortCodeMandatory(this.value);">
+							{{getDropDown("mfx_citisetlchannel_mst","settlement_channel","settlement_channel","no","dd_setl_channel",getParameter('Default_Settlement_Channel'))}}
+					</select>
+					
+				</td>
+				<td align = "left"> &nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>	
+<!--1-->
+	</fieldset>	
+	<table>
+		<tr>
+		<!-- Cahnged chkSpecialChar function to chkSpecialCharSwift for allowing some special characters on 03082010 -->
+			<td>
+					<fieldset  align:'left'">
+							<legend ><B>Senders Detail</B></legend>	
+							<table border=0  cellpadding="2">
+								<tr  style="display: flex;
+								justify-content:  flex-end;
+								padding: .2em;">	
+										<td class="label"   style="flex: 1; "><b> <font color="red">[S50K]</font>  Name:</b></td>
+										<td style="flex: 2;">
+												<input type = 'text' name = 'send_name' id = 'send_name' fieldname = 'send_name'  class = 'inputspecial'  value = "{{getSwiftFieldData('send_name')}}" accesskey = ""  validator="nonEmpty"  onblur = "chkSpecialCharSwift('send_name');chkSpecialChar('send_name');makeUpperCase(this.value,send_name);" maxlength = 30 >
+										</td>
+								</tr>
+								<tr style="display: flex;
+								justify-content:  flex-end;
+								padding: .2em;">
+										<td class="label"  style="flex: 1;"><b><font color="red">[S50K]</font> Address:</b></td>
+										<td style="flex: 2;">
+												<input type = 'text' name = 'send_address' id = 'send_address' fieldname = 'send_address'  class = 'inputspecial'  value = "{{getSwiftFieldData('send_address')}}" accesskey = ""  validator="nonEmpty" onblur="chkSpecialCharSwift('send_address');chkSpecialChar('send_address'); makeUpperCase(this.value,send_address);" maxlength = 1000>
+										</td>
+								</tr>
+								<tr style="display: flex;
+								justify-content:  flex-end;
+								padding: .2em;">
+										<td class="label"  style="flex: 1;"><b><font color="red">[S50K]</font>Account/ID No: </b></td>
+										<td style="flex: 2;">
+												<input type = 'text' name = 'send_pass_n_no' id =  'send_pass_n_no' fieldname =  'send_pass_n_no' class = 'inputspecial'  value = "{{getSwiftFieldData('send_pass_n_no')}}" accesskey = ""   onblur = "makeUpperCase(this.value,send_pass_n_no);chkSpecialCharSwift('send_pass_n_no');" maxlength = 30>
+										</td>
+								</tr>
+								<tr>
+								<td align = "left"> &nbsp;</td>
+										<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td align = "left"> &nbsp;</td>
+										<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td align = "left"> &nbsp;</td>
+										<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td align = "left"> &nbsp;</td>
+										<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td align = "left"> &nbsp;</td>
+										<td>&nbsp;</td>
+								</tr>
+								
+							</table>
+					</fieldset>	
+					<fieldset  align:'right">
+					<legend ><B>Sending Bank Details:</B></legend>	
+						<table border=0  cellpadding="2">
+							<tr style="display: flex;
+							justify-content:  flex-end;
+							padding: .2em;">
+								<td class="label" style="flex: 1;" width=25%><b>Swift Code:</b> </td>
+								<td style="flex: 2;">
+										<input type = 'text' name = 'sswiftcode' validator="nonEmpty" id =  'sswiftcode' fieldname =  'sswiftcode' class = 'inputspecial'  value = "{{getSwiftFieldData('sswiftcode')}}" accesskey = ""  style = "width:100px;" readonly tabindex="-1">
+								</td>
+							</tr>
+							<tr style="display: flex;
+							justify-content:  flex-end;
+							padding: .2em;">
+									<td class="label" style="flex: 1;" width=25%><b>Bank:</b> </td>
+									<td style="flex: 2;">
+											<input type = 'text' name = 'send_bank' validator="nonEmpty" id =  'send_bank' fieldname =  'send_bank' class = 'inputspecial'  value = "{{getSwiftFieldData('send_bank')}}" accesskey = ""  style = "width:100px;" readonly tabindex="-1">
+									</td>
+							</tr>
+							<tr style="display: flex;
+							justify-content:  flex-end;
+							padding: .2em;">
+									<td class="label" style="flex: 1;" width=25%><b>Account No:</b> </td>
+									<td style="flex: 2;">
+												<input type = 'text' name = 'send_acct_no' validator="nonEmpty" id =  'send_acct_no' fieldname = 'send_acct_no' class = 'inputspecial'  value = "{{getSwiftFieldData('send_acct_no')}}" accesskey = ""  style = "width:100px;" readonly tabindex="-1">
+									</td>
+							</tr>
+							<tr style="display: flex;
+							justify-content:  flex-end;
+							padding: .2em;">
+								<td align = "left"> &nbsp;</td>
+										<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td align = "left"> &nbsp;</td>
+										<td>&nbsp;</td>
+								</tr>
+						</table>
+				</fieldset>
+		</td>
+		<td width=50%>
+			<fieldset  align:'right">
+			<legend ><B>Beneficiary Detail</B></legend>	
+				<table border=0  cellpadding="2">
+					<tr style="display: flex;
+					justify-content:  flex-end;
+					padding: .2em;" >	
+							<td width=30%  class="label" style="flex: 1;"><b><font color="red">[S57A]</font> SWIFT code:</b></td>
+							<td style="flex: 2;">
+								<INPUT class=inputspecial id = "bic_code1"  name = "bic_code1"  codefield="short_name"  namefield = "swift_key_avl"   recno = 0 mastertable = "mfx_bic_swift_data" style = "width:90px"  onFocus = "setEntityParamBic()" onblur = ""> 
+								<INPUT class=inputspecial id = "bic_code2"  name = "bic_code2"  style = "width:90px"  onFocus = "" onblur = ""> 
+								
+								<input type="hidden" id="bic_code" name = "bic_code" type="text" fieldname = "bic_code" tablename = "mfx_bic_swift_data"  value ="">
+								<input type="checkbox" id="manualchkbox" class="inputspecial"  onClick="if(this.checked) {document.getElementById('manualtxtbox').value='Y';setEntityParamBicOff();} else {document.getElementById('manualtxtbox').value='N';setEntityParamBicOn();};">
+								<label class='label'>&nbsp;Editable</label>
+								<input type="hidden" id="manualtxtbox" name = "manualtxtbox" type="text" fieldname = "bic_editable"  value ="">
+							</td>
+					</tr>
+					<tr style="display: flex;
+					justify-content:  flex-end;
+					padding: .2em;">
+							<td class="label"  style="flex: 1;"><b><font color="red">[S59]</font> Name:</b></td>
+							<td  style="flex: 2;">
+									<input type = 'text' name = 'benif_name' id = 'benif_name' fieldname = 'benif_name'  class = 'inputspecial'  value = "{{getSwiftFieldData('benif_name')}}" accesskey = ""  validator="nonEmpty"  onblur = "chkSpecialCharSwift('benif_name');chkSpecialChar('benif_name');makeUpperCase(this.value,benif_name);"  maxlength = 255  onFocus = "getBICData();">
+							</td>
+					</tr>
+					<tr style="display: flex;
+					justify-content:  flex-end;
+					padding: .2em;" >
+							<td class="label"  style="flex: 1;"><b><font color="red">[S59]</font> Address:</b></td>
+							<td  style="flex: 2;">
+									<input type = 'text' name = 'benif_address' id = 'benif_address' fieldname = 'benif_address'  class = 'inputspecial'  value = "{{getSwiftFieldData('benif_address')}}" accesskey = ""  validator="nonEmpty" onblur="chkSpecialCharSwift('benif_address');chkSpecialChar('benif_address'); makeUpperCase(this.value,benif_address);" maxlength = 1000>
+							</td>
+					</tr>
+					<tr style="display: flex;
+					justify-content:  flex-end;
+					padding: .2em;">
+						<td class="label"  style="flex: 1;" ><b><font color="red">[S59]</font> Account No/IBAN:</b> </td>
+						<td  style="flex: 2;">
+								<input type = 'text' name = 'benif_acct_no' id =  'benif_acct_no' fieldname = 'benif_acct_no' class = 'inputspecial'  value = "{{getSwiftFieldData('benif_acct_no')}}" accesskey = ""   onkeypress="return ValidateSpace(event);" validator="nonEmpty"  onblur = "chkSpecialCharSwift('benif_acct_no'); makeUpperCase(this.value,benif_acct_no);" maxlength = 44>
+						</td>
+				</tr>
+				<tr style="display: flex;
+				justify-content:  flex-end;
+				padding: .2em;">
+				<td class="label"  style="flex: 1;"><b>State/Province:</b> </td>
+				<td  style="flex: 2;">
+					<input type = 'text' name = 'state_province' id =  'state_province' fieldname = 'state_province' class = 'inputspecial'  value = "{{getSwiftFieldData('state_province')}}" accesskey = ""   onkeypress="return ValidateSpace(event);" validator=""  onblur = "chkSpecialCharSwift('state_province'); makeUpperCase(this.value,state_province);" maxlength = 30>
+				</td>
+				</tr>
+				<tr style="display: flex;
+				justify-content:  flex-end;
+				padding: .2em;">
+					<td class="label"  style="flex: 1;"><b>Pincode:</b> </td>
+					<td  style="flex: 2;">
+						<input type = 'text' name = 'pincode' id =  'pincode' fieldname = 'pincode' class = 'inputspecial'  value = "{{getSwiftFieldData('pincode')}}" accesskey = ""  onkeypress="return ValidateSpace(event);" validator="number"  onblur = "chkSpecialCharSwift('pincode'); makeUpperCase(this.value,pincode);" maxlength = 6>
+					</td>
+				</tr>
+				<tr style="display: flex;
+				justify-content:  flex-end;
+				padding: .2em;">
+				<td class="label"  style="flex: 1;"><b>Account Type:</b> </td>
+				<td  style="flex: 2;">
+					<select  class="inputspecial" accesskey='' style="width:110px" id="account_type" fieldname="account_type"  validator="" onchange="">
+						{{getDropDown("mfx_tt_master","account_type","account_type","yes","dd_citi_account_type" )}}
+					</select>
+				</td>
+				</tr>
+			</table>
+		</fieldset>
+		<fieldset  align:'right">
+			<legend ><B>Beneficiary's Bank Details:</B></legend>	
+			<table border=0  cellpadding="2">
+				<tr style="display: flex;
+				justify-content:  flex-end;
+				padding: .2em;">
+						<!--td class="label" align = "right"><b>Swift Code:</b> </td-->
+						<td style="flex: 1;">
+								<input type = 'hidden' name = 'bswiftcode' id =  'bswiftcode' fieldname =  'bswiftcode' class = 'inputspecial'  value = "{{getSwiftFieldData('bswiftcode')}}" accesskey = ""  style = "width:100px;" onblur = "chkSpecialCharSwift('bswiftcode'); makeUpperCase(this.value,bswiftcode); chkLength(this.value,this.id);" validator="" maxlength = 30  onFocus="getBICData();">
+						</td>
+				</tr>
+				<tr style="display: flex;
+				justify-content:  flex-end;
+				padding: .2em;">
+						<td class="label" style="flex: 1;"><b>Bank:</b> </td>
+						<td style="flex: 2;">
+								<input type = 'text' name = 'benif_bank' id =  'benif_bank' fieldname =  'benif_bank' class = 'inputspecial'  value = "{{getSwiftFieldData('benif_bank')}}" accesskey = ""  validator="nonEmpty" onblur = "chkSpecialCharSwift('benif_bank');chkSpecialChar('benif_bank');makeUpperCase(this.value,benif_bank);" maxlength = 100>
+						</td>
+				</tr>
+				<tr style="display: flex;
+				justify-content:  flex-end;
+				padding: .2em;" >
+							<td class="label" style="flex: 1;"><b>Address:</b></td>
+							<td style="flex: 2;">
+									<input type = 'text' name = 'benif_bank_address' id = 'benif_bank_address' fieldname = 'benif_bank_address'  class = 'inputspecial'  value = "{{getSwiftFieldData('benif_bank_address')}}" accesskey = ""  validator="nonEmpty" onblur="chkSpecialCharSwift('benif_bank_address');chkSpecialChar('benif_bank_address'); makeUpperCase(this.value,benif_bank_address);" maxlength = 1000>
+							</td>
+					</tr>
+					<tr style="display: flex;
+					justify-content:  flex-end;
+					padding: .2em;">
+							<td class="label" style="flex: 1;"><b><font color="red">[S57A/S57D]</font> SORT/ABA/BSB/TRANSIT NO/FW:</b></td>
+							<td style="flex: 2;">
+								<input type = 'text' name = 'benif_bank_otherno' id =  'benif_bank_otherno' fieldname = 'benif_bank_otherno' class = 'inputspecial'  value = "{{getSwiftFieldData('benif_bank_otherno')}}" accesskey = ""     onblur = "chkSpecialCharSwiftSortNo('benif_bank_otherno'); makeUpperCase(this.value,benif_bank_otherno);chkSortCodeLength(this.value);" maxlength = 100>
+						</td>
+					</tr>
+					<tr style="display: flex;
+					justify-content:  flex-end;
+					padding: .2em;">
+						<TD class="label" style="flex: 1;"><B><font color="red">[S59]</font> <u>C</u>ountry:</B></TD>
+						<TD style="flex: 2;">
+							<select  class="inputspecial"  accesskey=''  id="benif_country" fieldname="benif_country"  validator="nonEmpty"  tabindex="14" onchange="setSetlChannel();" style="background-color: #ffffcc;">
+							{{getDropDown("mfx_country_master","country_name","country_name","yes","dd_nationality" )}}
+					</select>
+						</TD>
+				   </tr>
+			</table>
+		</fieldset>
+	</td>
+	</tr>
+</table>
+<table >
+<!-- new-->	
+	<tr>
+		<td>	
+			<fieldset  >
+			<legend ><B>Intermediate Bank Details:</B></legend>	
+			<table border=0  cellpadding=""  >
+				<tr  style="display: flex;
+				justify-content:  flex-end;
+				padding: .2em;">
+						<td class="label" style="flex: 1;"><b><font color="red">[S56A]</font> Swift&nbsp;Code:</b></td>
+						<td  style="flex: 1;"> 
+								<input type = 'text' name = 'oswiftcode' id =  'oswiftcode' fieldname =  'oswiftcode' class = 'inputspecial'  value = "{{getSwiftFieldData('oswiftcode')}}" accesskey = ""    onblur = "chkSpecialCharSwift('oswiftcode'); makeUpperCase(this.value,oswiftcode); chkLength(this.value,this.id);"  maxlength = 30>
+						</td >
+						<td class="label"  style="flex: 1;"><b>Bank:</b></td>	
+						<td  style="flex: 1;"> 
+								<input type = 'text' name = 'otherbank' id =  'otherbank' fieldname =  'otherbank' class = 'inputspecial'  value = "{{getSwiftFieldData('otherbank')}}" accesskey = ""    onblur = "chkSpecialCharSwift('otherbank'); makeUpperCase(this.value,otherbank);" maxlength =100>
+						</td>								
+						<td class="label"  style="flex: 1;" ><b><font color="red">[S57A]</font> Account No:</b> </td>
+						<td  style="flex: 1;">
+								<input type = 'text' name = 'int_bank_acct_no' id =  'int_bank_acct_no' fieldname = 'int_bank_acct_no' class = 'inputspecial'  value = "{{getSwiftFieldData('int_bank_acct_no')}}" accesskey = ""   onblur = "chkSpecialCharSwift('int_bank_acct_no'); makeUpperCase(this.value,int_bank_acct_no);" maxlength = 30>
+						</td>
+				</tr>
+				<tr style="display: flex;
+				justify-content:  flex-end;
+				padding: .2em;">
+	
+						<td class="label"  style="flex: 1;" ><b><font color="red">[S56A/S56D]</font>SORT/ABA/BSB/TRANSIT NO/FW:</b> 
+						</td>
+						<td  style="flex: 1;">
+						<input type = 'text' name = 'other_acct_no' id =  'other_acct_no' fieldname = 'other_acct_no' class = 'inputspecial'  value = "{{getSwiftFieldData('other_acct_no')}}" accesskey = ""    onblur = "chkSpecialCharSwift('other_acct_no'); makeUpperCase(this.value,other_acct_no);" maxlength = 30>
+					</td>
+							<td class="label"  style="flex: 1;"><b>Address:</b></td>
+							<td colspan="2"  style="flex: 1;">
+									<input type = 'text' name = 'int_bank_address' id = 'int_bank_address' fieldname = 'int_bank_address'  class = 'inputspecial'  value = "{{getSwiftFieldData('int_bank_address')}}" accesskey = ""   onblur="chkSpecialCharSwift('int_bank_address'); makeUpperCase(this.value,int_bank_address);" maxlength = 1000>
+							</td>
+				</tr>
+			</table>
+			</fieldset>
+		</td>
+	</tr>
+<!-- new-->
+</table>
+		<td>
+				<table valign = "top">
+					<tr style="display: flex;
+					justify-content:  flex-end;
+					padding: .2em;">
+							<td class="label" style="flex: 1;" ><b><font color="red">[S70]</font> Additional Information:</b> </td>
+							<td style="flex: 1;" >
+										<input type = 'text' name = 'addinform' id =  'addinform' fieldname = 'addinform' class = 'inputspecial'  validator="" value = "{{getSwiftFieldData('addinform')}}" accesskey = ""   onblur = "chkSpecialChar1('addinform'); makeUpperCase(this.value,addinform);" maxlength = 1000>
+							</td>
+							<td class="label" style="flex: 1;" ><b>Charges:</b> </td>
+					
+							<td style="flex: 1;" >
+										<input type = 'text' name = 'tt_charges' id =  'tt_charges' fieldname = 'tt_charges' class = 'inputspecial' validator="number" value = "0" accesskey = ""   maxlength = 1000  disabled>
+							</td>
+							<td class="label" style="flex: 1;" ><b><font color="red">[S71]</font> Charges Type:</b> </td>
+							<td style="flex: 1;" >
+										<select type = 'text' name = 'charges_type' id =  'charges_type' fieldname = 'charges_type' class = 'inputspecial' validator="nonEmpty" value = "{{getSwiftFieldData('charges_type')}}" accesskey = ""onchange="setDefaultChargesTypeCharges();" maxlength = 20>		    
+										    <option VALUE= '' {{getSelectedData('charges_type','')}}selected =""></option>
+											<option VALUE= 'SHA' {{getSelectedData('charges_type','SHA')}}>SHA</option>
+										    <option VALUE= 'OUR' {{getSelectedData('charges_type','OUR')}} >OUR</option>
+										</select>
+							</td>
+							<tr style="display: flex;
+							justify-content:  flex-end;
+							padding: .2em;">
+							<td class="label" style="flex: 1;" ><b>CPC Purpose:</b> </td>
+							<td style="flex: 1;">
+							<select type = 'text' class="inputspecial"  accesskey=''  name="benif_purpose" id="benif_purpose" fieldname="benif_purpose" value = "{{getSwiftFieldData('benif_purpose')}}" validator="nonEmpty"  tabindex="14" onchange="" style="background-color: #ffffcc;">
+														{{getDropDown("mfx_purpose_master","purpose_code","purpose_code","no","dd_benif_purpose" )}}
+												</select>
+							</td>
+							<TD class=label style="flex: 1;"><B><u>T</u>he funds being remitted are from the sale of property?</TD>
+														<TD style="flex: 1;">
+															<select name="property_sale" id = "property_sale" fieldname="property_sale" fieldname="" validator="nonEmpty" style="background-color: #ffffcc;" onchange="setAddinformVal();" class="inputspecial" tabindex="7" >
+																<option value="" selected=""></option><option value="Y" >Yes</option><option value="N" >No</option>
+															</select>
+														</TD>
+														
+								<td class="label" style="flex: 1;" ><b><font color="red">[S72]</font> CPC Sender Info:</b> </td>
+							<td style="flex: 1;">
+										<input type = 'text' name = 'cpcsenderinform' id =  'cpcsenderinform' fieldname = 'cpcsenderinform' class = 'inputspecial'  validator="" value = "{{getSwiftFieldData('cpcsenderinform')}}" accesskey = ""  onblur = "chkSpecialCharSwift('cpcsenderinform'); makeUpperCase(this.value,cpcsenderinform);" maxlength = 105>
+							</td>
+							</tr>
+					</tr>
+				</table>
+		</td>	
+</form>
+<table>
+	<tr>
+		<td>
+			<button style="left:0px;WIDTH:50px;HEIGHT:24px" onclick= "chkSpecialChar('send_name');chkSpecialChar('benif_name');getBICDataSave(); if(remitDetailsAction == 'add') SaveTT(); else if(remitDetailsAction == 'modify') ModifyData();" type="button" value='Save' name='TTsave' id='TTsave'  tabindex='' accesskey='' class="button">Save</button>
+		</td>
+		<td>
+			<button style="left:0px;WIDTH:50px;HEIGHT:24px" onclick= "if(remitDetailsAction == 'add') win4.hide(); else if(remitDetailsAction == 'modify') wintab.hide();" type="button" value='Close' name='TTClose' id='TTClose'  tabindex='' accesskey='' class="button">Close</button>
+		</td>
+	<tr>
+</table>
+</div>
